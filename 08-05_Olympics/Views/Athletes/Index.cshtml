@@ -1,0 +1,38 @@
+﻿@model Olympics2021.Models.ViewModels.ParticipantsModel
+@{
+    ViewData["Title"] = "Athletes";
+}
+
+<h2 class="d-inline-block mb-4">Athletes</h2>
+
+@Html.ActionLink("Add an athlete", "Create", "Athletes", null, new { @class = "btn btn-primary float-right" })
+
+@if (Model.Athletes.Count == 0)
+{
+    <p>There are no athletes.</p>
+}
+else
+{
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th class="text-center">Id</th>
+                <th class="text-center">Name</th>
+                <th class="text-center">Surname</th>
+                <th class="text-center">Country</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var athlete in Model.Athletes)
+            {
+                <tr>
+                    <td class="text-center">@Html.ActionLink($"{athlete.Id}", "Edit", "Athletes", new { id = athlete.Id }, null)</td>
+                    <td class="text-center">@Html.ActionLink(athlete.Name, "Edit", "Athletes", new { id = athlete.Id }, null)</td>
+                    <td class="text-center">@Html.ActionLink(athlete.Surname, "Edit", "Athletes", new { id = athlete.Id }, null)</td>
+                    <td class="text-center">@athlete.Country.Name</td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+}
